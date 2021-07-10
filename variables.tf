@@ -7,7 +7,7 @@ variable "hcloud_token" {
 }
 
 variable "hcloud_server_type" {
-  description = "vServer type name, lookup via `hcloud server-type list` Requires at least 3GB of RAM"
+  description = "Server type name, see `hcloud server-type list`. Requires at least 4GB of RAM"
   type        = string
   default     = "cx21"
 }
