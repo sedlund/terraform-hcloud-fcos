@@ -30,7 +30,12 @@ module "hcloud_fcos" {
 An `Ignition` `config.yaml` file in the directory with your above `main.tf` is
 sent to the server and processed there by `Butane`.
 
-A VM with at least 4GB is required to complete the install for the CoreOS image
-and docker to fit in memory.  After install you can use `hcloud server
-change-type` to reduce the size if required.
+Currently a VM with at least 4GB is required to complete the install for the
+CoreOS image and docker to fit in memory.  After install you can use `hcloud
+server change-type` to reduce the size if required.
+
+If you wanted to to install on the smallest VM's on Hetzner, it may be possible
+to create and attach a volume to `/var/lib/docker` before installing docker and
+running `coreos-installer` to reduce the required memory usage.  I haven't
+tried this yet.
 
