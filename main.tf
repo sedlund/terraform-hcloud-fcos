@@ -1,7 +1,3 @@
-provider "hcloud" {
-  token = var.hcloud_token
-}
-
 resource "hcloud_server" "instance" {
   name   = var.hcloud_server_name
   labels = { "os" = "coreos" }

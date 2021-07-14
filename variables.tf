@@ -32,7 +32,7 @@ variable "ssh_public_key_name" {
 
 variable "network" {
   description = "(Optional) Network the server should be attached to on creation. (Can be specified multiple times)"
-  type        = map(any)
+  type        = map(string)
 }
 
 variable "tools_butane_version" {
