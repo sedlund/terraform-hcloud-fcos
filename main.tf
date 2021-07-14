@@ -9,7 +9,7 @@ resource "hcloud_server" "instance" {
   image    = "fedora-34"
   rescue   = "linux64"
   ssh_keys = var.ssh_public_key_name
-  network  = (var.network != "" ? var.network : null)
+  network  = (var.network ? var.network : null)
 
   connection {
     host    = hcloud_server.instance.ipv4_address
