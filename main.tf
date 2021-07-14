@@ -13,13 +13,13 @@ resource "hcloud_server" "instance" {
   image    = "fedora-34"
   rescue   = "linux64"
   ssh_keys = var.ssh_public_key_name
+  network  = (var.network != "" ? var.network : "")
 
   connection {
     host    = hcloud_server.instance.ipv4_address
     timeout = "5m"
     agent   = true
-    # Root is the available user in rescue mode
-    user = "root"
+    user    = "root" # Root is the available user in rescue mode 
   }
 
   # Copy config.yaml

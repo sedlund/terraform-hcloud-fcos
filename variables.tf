@@ -30,6 +30,10 @@ variable "ssh_public_key_name" {
   default     = ["My-SSH-Key"]
 }
 
+variable "network" {
+  description = "(Optional) Network the server should be attached to on creation. (Can be specified multiple times)"
+}
+
 variable "tools_butane_version" {
   description = "See https://quay.io/repository/coreos/butane?tag=latest&tab=tags for available versions"
   type        = string
