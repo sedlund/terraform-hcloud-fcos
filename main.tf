@@ -13,7 +13,7 @@ resource "hcloud_server" "instance" {
   image    = "fedora-34"
   rescue   = "linux64"
   ssh_keys = var.ssh_public_key_name
-  network  = (var.network != "" ? var.network : "")
+  network  = (var.network != "" ? var.network : null)
 
   connection {
     host    = hcloud_server.instance.ipv4_address
@@ -57,7 +57,6 @@ resource "hcloud_server" "instance" {
 
     inline = [
       "sudo hostnamectl set-hostname ${hcloud_server.instance.name}"
-      # Add additional commands if needed
     ]
   }
 }
