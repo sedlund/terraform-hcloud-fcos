@@ -5,11 +5,9 @@ resource "hcloud_server" "instance" {
   server_type = var.hcloud_server_type
   datacenter  = var.hcloud_server_datacenter
 
-  # Image is ignored, as we boot into rescue mode, but is a required field
-  image    = "fedora-34"
+  image    = "fedora-34" # Image is ignored, as we boot into rescue mode, but is a required field
   rescue   = "linux64"
-  ssh_keys = var.ssh_public_key_name
-  network  = (var.network ? var.network : null)
+  ssh_keys = var.ssh_key_name
 
   connection {
     host    = hcloud_server.instance.ipv4_address
@@ -32,7 +30,7 @@ resource "hcloud_server" "instance" {
       "update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy",
       "apt install -y docker.io",
       "apt clean",
-      "docker run -it --rm -v /root:/pwd -w /pwd quay.io/coreos/butane:${var.tools_butane_version} -o config.ign config.yaml",
+      "docker run -it --rm -v /root:/root -w /root quay.io/coreos/butane:${var.tools_butane_version} -o config.ign config.yaml",
       "docker run --privileged --rm -v /dev:/dev -v /run/udev:/run/udev -v /root:/data -w /data quay.io/coreos/coreos-installer:release install /dev/sda -p qemu -i config.ign",
       # Force a sync otherwise install sometimes fails?
       "sync",

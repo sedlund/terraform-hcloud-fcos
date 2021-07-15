@@ -24,19 +24,20 @@ variable "hcloud_server_name" {
   default     = "www1"
 }
 
-variable "ssh_public_key_name" {
+variable "ssh_key_name" {
   description = "Name of your public key to identify at Hetzner Cloud portal"
   type        = list(string)
   default     = ["My-SSH-Key"]
 }
 
-variable "network" {
-  description = "(Optional) Network the server should be attached to on creation. (Can be specified multiple times)"
-  type        = map(string)
-}
+/* variable "network" { */
+/*   description = "(Optional) Network the server should be attached to on creation. (Can be specified multiple times)" */
+/*   type        = map(any) */
+/*   default     = [null] */
+/* } */
 
 variable "tools_butane_version" {
-  description = "See https://quay.io/repository/coreos/butane?tag=latest&tab=tags for available versions"
+  description = "See https://quay.io/repository/coreos/butane?tab=tags for available versions"
   type        = string
   default     = "release"
 }
