@@ -7,35 +7,21 @@ via [terraform](https://www.terraform.io) on Hetzner Cloud.
 
 Include it in your environment config.
 
-`main.tf`
-```
-module "hcloud_fcos" {
-  source = "git::https://github.com/sedlund/terraform-hcloud-fcos.git?ref=v0.0.1"
-  
-  # Required
-  hcloud_token             = "your api token here"
-
-  # Defaults
-  hcloud_server_type       = "cx21"
-  hcloud_server_datacenter = "fsn1-dc14"
-  hcloud_server_name       = "www1"
-  ssh_public_key_name      = "My-SSH-Key"
-  tools_butane_version     = "release"
-  ignition_yaml            = "config.yaml" 
-}
-```
-
 ## Notes
 
 An `Ignition` `config.yaml` file in the directory with your above `main.tf` is
 sent to the server and processed there by `Butane`.
 
-Currently a VM with at least 4GB is required to complete the install for the
-CoreOS image and docker to fit in memory.  After install you can use `hcloud
-server change-type` to reduce the size if required.
+Currently there is a
+[bug](https://github.com/coreos/coreos-installer/issues/575) in
+`coreos-installer` or with the use of it in a container that causes it to fail
+on VM's with only 1 cpu/thread.  I built a container you can specify in the
+variables to this module that resolves this.  It's at
+`sedlund/coreos-installer-1cpu`.
 
-If you wanted to to install on the smallest VM's on Hetzner, it may be possible
-to create and attach a volume to `/var/lib/docker` before installing docker and
-running `coreos-installer` to reduce the required memory usage.  I haven't
-tried this yet.
+## Todo
+
+Add the option to createIfNotExists a volume to download and uncomrpress the
+the CoreOS image on to that can be sequentially be used by each VM creation
+instead of downloading the image X number of times.
 
