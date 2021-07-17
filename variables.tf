@@ -7,9 +7,9 @@ variable "hcloud_token" {
 }
 
 variable "hcloud_server_type" {
-  description = "Server type name, see `hcloud server-type list`. Requires at least 4GB of RAM"
+  description = "Server type name, see `hcloud server-type list`. Requires at least 2GB of RAM"
   type        = string
-  default     = "cx21"
+  default     = "cx11"
 }
 
 variable "hcloud_server_datacenter" {
@@ -21,7 +21,7 @@ variable "hcloud_server_datacenter" {
 variable "hcloud_server_name" {
   description = "Name of the server"
   type        = string
-  default     = "www1"
+  default     = "coreos"
 }
 
 variable "ssh_key_name" {
@@ -36,10 +36,16 @@ variable "ssh_key_name" {
 /*   default     = [null] */
 /* } */
 
-variable "tools_butane_version" {
+variable "butane" {
   description = "See https://quay.io/repository/coreos/butane?tab=tags for available versions"
   type        = string
-  default     = "release"
+  default     = "quay.io/coreos/butane:release"
+}
+
+variable "coreos-installer" {
+  description = "See https://quay.io/repository/coreos/butane?tab=tags for available versions"
+  type        = string
+  default     = "quay.io/coreos/butane:release"
 }
 
 variable "ignition_yaml" {

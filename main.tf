@@ -30,10 +30,10 @@ resource "hcloud_server" "instance" {
       "update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy",
       "apt install -y docker.io",
       "apt clean",
-      "docker run -it --rm -v /root:/root -w /root quay.io/coreos/butane:${var.tools_butane_version} -o config.ign config.yaml",
-      "docker run --privileged --rm -v /dev:/dev -v /run/udev:/run/udev -v /root:/data -w /data quay.io/coreos/coreos-installer:release install /dev/sda -p metal -i config.ign",
+      "docker run -it --rm -v /root:/root -w /root ${var.butane} -o config.ign config.yaml",
+      "docker run --privileged --rm -v /dev:/dev -v /run/udev:/run/udev -v /root:/data -w /data ${var.coreos-installer} install /dev/sda -p metal -i config.ign",
       # Force a sync otherwise install sometimes fails?
-      "sync",
+      /* "sync", */
       # Exit rescue mode and boot into coreos
       "reboot",
     ]
